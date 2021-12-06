@@ -1,0 +1,23 @@
+{
+  "name": "watani-mall-task-_fatma-shawaf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fatmanaeem93/watani-Mall-Task-_fatma-shawaf.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fatmanaeem93/watani-Mall-Task-_fatma-shawaf/issues"
+  },
+  "homepage": "https://github.com/fatmanaeem93/watani-Mall-Task-_fatma-shawaf#readme",
+  "dependencies": {
+    "cypress": "^9.1.1"
+  }
+}
