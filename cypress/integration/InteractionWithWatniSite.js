@@ -94,4 +94,13 @@ describe('add and delete monitor product', () => {
 
 
     })
+    context('Delete one monitor from shopping cart', () => {
+        it('Verify clicking on delete first product', () => {
+            cy.get(".cart-remove").first().click()
+        });
+        it('Verify Deleting the item', () => {
+            cy.get('.mini-cart-items').should("have.length", "1")
+        });
+
+    })
 })
