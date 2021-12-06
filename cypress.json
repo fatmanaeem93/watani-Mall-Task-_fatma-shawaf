@@ -1,3 +1,5 @@
 {
-    "baseUrl":"https://watanimall.com/product-category/monitors"
+    "baseUrl":"https://watanimall.com/product-category/monitors",
+    "screenshotOnRunFailure":true,
+    "vedio":true
 }
