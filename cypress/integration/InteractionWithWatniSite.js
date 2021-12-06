@@ -82,10 +82,10 @@ describe('add and delete monitor product', () => {
                 })
             });
             it.skip('Verify the same item adding', function () {
-                cy.get(".product_title").first().should("contain", product_name2.trim().slice(1, 10))
+                cy.get(".product_title").first().should("contain",this.product_name2.trim().slice(1, 10))
             });
             it.skip('Verify the same price ammount adding', function () {
-                cy.get('.summary > .product-price > .woocommerce-Price-amount > bdi', { timeout: 10000 }).should("contain", this.product_price2)
+                cy.get('.summary > .product-price > .woocommerce-Price-amount > bdi', { timeout: 10000 }).should("contain",this.product_price2)
             });
             it('Verify adding tow amount of product', () => {
                 cy.get(".quantity .jcf-btn-inc").click()
