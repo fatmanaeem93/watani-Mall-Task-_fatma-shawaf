@@ -47,7 +47,7 @@ export class AllCategoryPageTests {
     return this.items.shoppingCart().should("be.visible")
   }
   lenghtofcartShopping(){
-    return this.items.lenghtofcartShopping().should("have.length", "1")
+    return this.items.lenghtOfShoppingCartItem().should("have.length", "1")
   }
   checkedAddedtheSameProductNameToCart(){
     return this.items.productNameOfShoppingCart().should("contain", this.product_name.trim().slice(1, 10))
