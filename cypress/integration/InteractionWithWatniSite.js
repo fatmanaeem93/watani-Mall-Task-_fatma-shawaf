@@ -32,8 +32,21 @@ describe('add and delete monitor product', () => {
         it('Verify shopping cart icon have 0 value', () => {
             cy.get(".mini_cart_control .counter").should('have.text', '0')
         });
-        it('Verify Adding monitor having the lowest price', () => {
+        it('Verify price select visible', () => {
+            cy.get('div.sort-wrapper form span.jcf-select-orderby').should('be.visible');
+        });
+        it('Verify Sorting', () => {
+            let url ="https://watanimall.com/product-category/monitors?orderby=price&_manufacturer=asus"
+            cy.intercept('POST', url).as('Request');
             cy.get("select[name='orderby']").select('price', { force: true }).should('have.value', 'price')
+            cy.wait('@Request');
+      });
+      it('verify product list sorted from down to up', () => {
+        cy.get('div.products-row div.product-col div.product-price').children().not('del').find('bdi').then((ele) => {
+            const unsorted = ele.map((index, el) =>  Cypress.$(el).text().substr(1).trim().replace(/,/g, '')).get();
+            const sorted = unsortedItems.slice().sort((a, b) => parseFloat(a) - parseFloat(b));
+            expect(sorted, 'Items are sorted').to.deep.equal(unsorted);
+          });
         });
         context('Adding monitor with lowest price', () => {
             it('Verify hovering and clicking on add to cart button', () => {
@@ -41,7 +54,7 @@ describe('add and delete monitor product', () => {
                 cy.get('.products-row > :nth-child(1) .product-name').then((el) => {
                     product_name = el.text()
                 })
-                cy.get(":nth-child(1) > .product-item > .product-price > .woocommerce-Price-amount > bdi").then((el) => {
+                cy.get('.products-row > :nth-child(1) div.product-price').children().not('del').find('bdi').then((el) => {
                     cy.wrap(el.text()).as('product_price1')
                 })
             });
@@ -74,17 +87,17 @@ describe('add and delete monitor product', () => {
         context('Adding another monitor', () => {
             it('Verify choosing the lowest price menitor', () => {
                 cy.get('.products-row > :nth-child(2)').click()
-                cy.get('.products-row > :nth-child(1) .product-name').then((el) => {
+                cy.get('.product_title').then((el) => {
                     cy.wrap(el.text()).as('product_name2')
                 })
-                cy.get(":nth-child(1) > .product-item > .product-price > .woocommerce-Price-amount > bdi").then((el) => {
+                cy.get('.summary > .product-price').children().not('del').find('bdi').then((el) => {
                     cy.wrap(el.text()).as('product_price2')
                 })
             });
-            it.skip('Verify the same item adding', function () {
+            it('Verify the same item adding', function () {
                 cy.get(".product_title").first().should("contain",this.product_name2.trim().slice(1, 10))
             });
-            it.skip('Verify the same price ammount adding', function () {
+            it('Verify the same price ammount adding', function () {
                 cy.get('.summary > .product-price > .woocommerce-Price-amount > bdi', { timeout: 10000 }).should("contain",this.product_price2)
             });
             it('Verify adding tow amount of product', () => {
