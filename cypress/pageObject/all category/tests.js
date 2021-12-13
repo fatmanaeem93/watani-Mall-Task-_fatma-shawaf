@@ -29,7 +29,7 @@ export class AllCategoryPageTests {
   checkallProductListSortedFromDownToUpSoretd(){
     this.items.productListSortedFromDownToUp().then(ele => {
          const unsorted = ele.map((index, el) =>  Cypress.$(el).text().substr(1).trim().replace(/,/g, '')).get();
-         const sorted = unsortedItems.slice().sort((a, b) => parseFloat(a) - parseFloat(b));
+         const sorted = unsorted.slice().sort((a, b) => parseFloat(a) - parseFloat(b));
          expect(sorted, 'Items are sorted').to.deep.equal(unsorted);
      });
   }
